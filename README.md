@@ -1,3 +1,20 @@
+# fork from github.com/xwb1989/sqlparser
+# NEW featrue: modify column name
+	``` golang
+	sel := stmt.(*sqlparser.Select)
+	colPrev := "mytable."
+	sqlparser.Walk(0, func(level int, node sqlparser.SQLNode) (kontinue bool, err error) {
+		if col, ok := node.(*sqlparser.ColName); ok {
+			oName := col.Name.GetV()
+			if oName == "id" {
+				col.Name.SetV("_id") // Change "id" to "_id"
+			} else if colPrev != "" {
+				col.Name.SetV(colPrev + oName) // Add prev to columnName
+			}
+		}
+		return true, nil
+	}, sel)
+	```
 # sqlparser [![Build Status](https://img.shields.io/travis/xwb1989/sqlparser.svg)](https://travis-ci.org/xwb1989/sqlparser) [![Coverage](https://img.shields.io/coveralls/xwb1989/sqlparser.svg)](https://coveralls.io/github/xwb1989/sqlparser) [![Report card](https://goreportcard.com/badge/hikvision.com/esapi/sqlparser)](https://goreportcard.com/report/hikvision.com/esapi/sqlparser) [![GoDoc](https://godoc.org/hikvision.com/esapi/sqlparser?status.svg)](https://godoc.org/hikvision.com/esapi/sqlparser)
 
 Go package for parsing MySQL SQL queries.
