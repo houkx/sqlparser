@@ -2,7 +2,8 @@
 # sqlparser
 func Walk(level int, visit Visit, nodes ...SQLNode)// 修改点: 对 Walk 函数增加 level 参数
 # 可以修改字段名
-sel := stmt.(*sqlparser.Select)
+```golang
+        selectObj := stmt.(*sqlparser.Select)
 	tagPrev := "mytable."
 	sqlparser.Walk(0, func(level int, node sqlparser.SQLNode) (kontinue bool, err error) {
 		if col, ok := node.(*sqlparser.ColName); ok {
@@ -14,4 +15,6 @@ sel := stmt.(*sqlparser.Select)
 			}
 		}
 		return true, nil
-	}, sel)
+	}, selectObj)
+```
+
