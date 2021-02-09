@@ -1,6 +1,6 @@
 # fork from github.com/xwb1989/sqlparser
 # NEW featrue: modify column name
-	``` golang
+	```golang
 	sel := stmt.(*sqlparser.Select)
 	colPrev := "mytable."
 	sqlparser.Walk(0, func(level int, node sqlparser.SQLNode) (kontinue bool, err error) {
